@@ -1,0 +1,10 @@
+{
+  "lerna": "2.2.0",
+  "packages": [
+    "packages/*",
+    "../mina-webpack/packages/*",
+    "../mina-sfc",
+    "../gulp-mina"
+  ],
+  "version": "independent"
+}
