@@ -1,0 +1,20 @@
+<config>
+{
+  "pages": [
+    "pages/counter"
+  ]
+}
+</config>
+
+<style>
+@import 'todomvc-common/base.css';
+
+</style>
+
+<script>
+App({
+  onLaunch () {
+    console.log('Hello from App!')
+  }
+})
+</script>

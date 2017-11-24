@@ -1,0 +1,81 @@
+<config>
+{
+  "name": "mina",
+  "usingComponents": {
+    "tina-logo": "~@tinajs/tina-logo.mina/dist/index"
+  }
+}
+</config>
+
+<style lang="postcss">
+page, .view {
+  height: 100%;
+  font-family: Arial;
+}
+
+.view {
+  padding: 20px;
+
+  .header {
+    padding:48px 0 24px;
+    border-bottom:1px solid #eee;
+    color:#666;
+    font-weight:normal;
+    font-size: 18px;
+    line-height: 32px;
+    .logo {
+      height: 24px;
+      width: 24px;
+      display: inline-block;
+    }
+  }
+
+  .count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    margin: 20px;
+  }
+
+  .paragraph {
+    margin: 18px;
+  }
+
+}
+</style>
+
+<template>
+  <view class="view">
+    <view class="header"><tina-logo class="logo" /> Counter</view>
+    <view class="count">{{ count }}</view>
+    <view class="paragraph"><button bindtap="add" type="primary">+1</button></view>
+    <view class="paragraph"><button bindtap="reset">Reset</button></view>
+  </view>
+</template>
+
+<script>
+const { TinaPage } = require('@tinajs/tina')
+
+new TinaPage({
+  data: {
+    count: 0,
+  },
+
+  onLoad () {
+  },
+
+  methods: {
+    add () {
+      this.setData({
+        count: this.data.count + 1,
+      })
+    },
+    reset () {
+      this.setData({
+        count: 0,
+      })
+    },
+  },
+})
+</script>
