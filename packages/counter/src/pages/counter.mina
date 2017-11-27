@@ -9,26 +9,12 @@
 
 <style lang="postcss">
 page, .view {
-  height: 100%;
   font-family: Arial;
+  background-color: #eee;
 }
 
 .view {
   padding: 20px;
-
-  .header {
-    padding:48px 0 24px;
-    border-bottom:1px solid #eee;
-    color:#666;
-    font-weight:normal;
-    font-size: 18px;
-    line-height: 32px;
-    .logo {
-      height: 24px;
-      width: 24px;
-      display: inline-block;
-    }
-  }
 
   .count {
     display: flex;
@@ -42,39 +28,57 @@ page, .view {
     margin: 18px;
   }
 
+  .logo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    font-size: 0;
+    opacity: 0.8;
+    &:active {
+      opacity: 1;
+    }
+    .tina {
+      display: inline-block;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+  }
+
 }
 </style>
 
 <template>
   <view class="view">
-    <view class="header"><tina-logo class="logo" /> Counter</view>
-    <view class="count">{{ count }}</view>
+    <view class="count">Counter: {{ count }}</view>
     <view class="paragraph"><button bindtap="add" type="primary">+1</button></view>
     <view class="paragraph"><button bindtap="reset">Reset</button></view>
+    <view class="logo"><tina-logo class="tina" size="40px" /></view>
   </view>
 </template>
 
 <script>
-const { TinaPage } = require('@tinajs/tina')
+const { Page } = require('@tinajs/tina')
 
-new TinaPage({
+new Page({
   data: {
-    count: 0,
+    count: wx.getStorageSync('count') || 0,
   },
 
   onLoad () {
   },
 
   methods: {
-    add () {
+    update (count) {
       this.setData({
-        count: this.data.count + 1,
-      })
+        count,
+      }, () => wx.setStorageSync('count', count))
+    },
+    add () {
+      this.update(this.data.count + 1)
     },
     reset () {
-      this.setData({
-        count: 0,
-      })
+      this.update(0)
     },
   },
 })
