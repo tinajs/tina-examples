@@ -60,7 +60,7 @@ page, .view {
 <script>
 const { Page } = require('@tinajs/tina')
 
-new Page({
+Page.define({
   data: {
     count: wx.getStorageSync('count') || 0,
   },
