@@ -11,9 +11,9 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "@tinajs/mina-entry-webpack-plugin": "^0.0.1",
-    "@tinajs/mina-loader": "^0.0.1",
-    "@tinajs/mina-runtime-webpack-plugin": "^0.0.1",
+    "@tinajs/mina-entry-webpack-plugin": "*",
+    "@tinajs/mina-loader": "*",
+    "@tinajs/mina-runtime-webpack-plugin": "*",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -26,8 +26,8 @@
     "webpack": "^3.8.1"
   },
   "dependencies": {
-    "@tinajs/tina": "^0.0.1",
-    "@tinajs/tina-logo.mina": "^0.0.1",
+    "@tinajs/tina": "*",
+    "@tinajs/tina-logo.mina": "*",
     "es6-promise": "^4.1.1",
     "todomvc-app-css": "^2.1.0",
     "todomvc-common": "^1.0.4"
