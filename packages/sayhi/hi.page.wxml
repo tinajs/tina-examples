@@ -1,0 +1,4 @@
+<view>
+  <text>I'm {{ fullname }}. </text>
+  <button bindtap="sayHi">Say Hi</button>
+</view>
