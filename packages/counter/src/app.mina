@@ -6,11 +6,6 @@
 }
 </config>
 
-<style>
-@import 'todomvc-common/base.css';
-
-</style>
-
 <script>
 App({
   onLaunch () {

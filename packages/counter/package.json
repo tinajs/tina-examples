@@ -1,5 +1,5 @@
 {
-  "name": "@tinajs/tina-examples-todomvc",
+  "name": "@tinajs/tina-examples-counter",
   "private": true,
   "version": "0.0.1",
   "description": "",
@@ -28,8 +28,6 @@
   "dependencies": {
     "@tinajs/tina": "*",
     "@tinajs/tina-logo.mina": "*",
-    "es6-promise": "^4.1.1",
-    "todomvc-app-css": "^2.1.0",
-    "todomvc-common": "^1.0.4"
+    "es6-promise": "^4.1.1"
   }
 }
