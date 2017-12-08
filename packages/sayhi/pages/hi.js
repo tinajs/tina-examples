@@ -1,5 +1,5 @@
-const { Page } = require('./tina.min.js')
-const { fetchUser } = require('./api')
+const { Page } = require('../libraries/tina.min.js')
+const { fetchUser } = require('../api')
 
 Page.define({
   data: {
