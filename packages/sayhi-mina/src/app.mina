@@ -1,0 +1,7 @@
+<config>
+{
+  "pages": [
+    "pages/hi"
+  ]
+}
+</config>

@@ -1,0 +1,45 @@
+<template>
+  <view>
+    <text>I'm {{ fullname }}. </text>
+    <button bindtap="sayHi">Say Hi</button>
+  </view>
+</template>
+
+<script>
+const { Page } = require('@tinajs/tina')
+const { fetchUser } = require('../api')
+
+Page.define({
+  data: {
+    name: 'Tina',
+    surname: 'S',
+  },
+  compute ({ name, surname }) {
+    return {
+      fullname: `${name} ${surname}`
+    }
+  },
+  onLoad () {
+    fetchUser()
+      .then(({ name, surname }) => this.setData({ name, surname }))
+  },
+  methods: {
+    sayHi () {
+      wx.showModal({
+        title: 'Hi!',
+        content: this.data.fullname,
+        showCancel: false,
+      })
+    },
+  }
+})
+</script>
+
+<style>
+view {
+  padding: 30px 20px;
+}
+button {
+  margin: 20px 0;
+}
+</style>
