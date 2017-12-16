@@ -48,14 +48,13 @@ export default {
     symlinks: true,
   },
   plugins: [
-    new MinaEntryPlugin({
-      map: (entry) => ['es6-promise/dist/es6-promise.auto.js', entry],
+    new MinaEntryPlugin(),
+    new MinaRuntimePlugin({
+      runtime: './common.js',
     }),
-    // new MinaRuntimePlugin({
-    //   runtime: './common.js',
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'common.js',
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common.js',
+      minChunks: 2,
+    }),
   ],
 }
