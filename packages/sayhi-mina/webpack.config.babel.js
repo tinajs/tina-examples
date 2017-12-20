@@ -15,7 +15,6 @@ export default {
     rules: [
       {
         test: /\.mina$/,
-        exclude: /node_modules/,
         use: [{
           loader: '@tinajs/mina-loader',
           options: {

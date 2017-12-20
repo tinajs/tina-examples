@@ -15,7 +15,6 @@ export default {
     rules: [
       {
         test: /\.mina$/,
-        exclude: /node_modules/,
         use: [{
           loader: '@tinajs/mina-loader',
           options: {
@@ -48,14 +47,6 @@ export default {
     symlinks: true,
   },
   plugins: [
-    new MinaEntryPlugin({
-      map: (entry) => ['es6-promise/dist/es6-promise.auto.js', entry],
-    }),
-    // new MinaRuntimePlugin({
-    //   runtime: './common.js',
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'common.js',
-    // }),
+    new MinaEntryPlugin(),
   ],
 }

@@ -6,9 +6,11 @@
   "author": "yelo",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf ./dist",
+    "clean": "rimraf './dist/!(app.json)**'",
+    "prestart": "run-s clean",
     "prebuild": "run-s clean",
-    "build": "webpack"
+    "start": "webpack -w",
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "devDependencies": {
     "@tinajs/mina-entry-webpack-plugin": "*",
@@ -18,6 +20,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
+    "cross-env": "^5.1.1",
     "file-loader": "^1.1.5",
     "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.0.9",
@@ -27,7 +30,6 @@
   },
   "dependencies": {
     "@tinajs/tina": "*",
-    "@tinajs/tina-logo.mina": "*",
-    "es6-promise": "^4.1.1"
+    "@tinajs/tina-logo.mina": "*"
   }
 }
