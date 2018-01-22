@@ -1,0 +1,22 @@
+<config>
+{
+  "window": {
+    "navigationBarTitleText": "TodoMVC Lite"
+  },
+  "pages": [
+    "pages/home.mina"
+  ]
+}
+</config>
+
+<script>
+App({
+})
+</script>
+
+<style>
+page {
+  font-size: 14px;
+  font-family: Helvetica, serif;
+}
+</style>
