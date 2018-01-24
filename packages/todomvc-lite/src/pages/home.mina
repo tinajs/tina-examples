@@ -26,7 +26,6 @@
 
 <script>
 import { Page } from '@tinajs/tina'
-import clone from 'clone'
 
 const FILTERS = [
   { key: 'SHOW_ALL', text: 'All' },
@@ -66,9 +65,40 @@ Page.define({
   methods: {
     toggleTodo (event) {
       let id = event.detail.todo.id
-      let todos = clone(this.data.todos)
-      let todo = todos.find((t) => t.id === id)
-      todo.completed = !todo.completed
+      /**
+       * Thanks to the ``Tina.SigmundData``, you can mutate the data directly like this:
+       *
+       * ```javascript
+       * let todos = this.data.todos
+       * let todo = todos.find((t) => t.id === id)
+       * todo.completed = !todo.completed
+       * this.setData({
+       *   todos,
+       * })
+       * ```
+       *
+       * However, we still suggest you treat the data as immutable.
+       *
+       * For the best performance with the simplest implementation,
+       *   you could use ``Tina.BasicData`` instead of ``Tina.SigmundData`` when you keep all the data immutable:
+       *
+       * ```javascript
+       * import { Basic, BasicData } from '@tinajs/tina'
+       * Basic.Data = BasicData
+       * ```
+       *
+       * FYI:
+       * - https://github.com/tinajs/tina/blob/master/src/data/basic.js
+       * - https://github.com/tinajs/tina/blob/master/src/data/sigmund.js
+       *
+       */
+      let todos = this.data.todos.slice()
+      let index = todos.findIndex((t) => t.id === id)
+      let before = todos[index]
+      todos[index] = {
+        ...before,
+        completed: !before.completed,
+      }
       this.setData({
         todos: todos,
       })
@@ -87,7 +117,7 @@ Page.define({
     addTodo (event) {
       let { value } = event.detail
       this.setData({
-        todos: clone(this.data.todos).concat({
+        todos: this.data.todos.concat({
           id: Date.now(),
           text: value,
           completed: false,
@@ -97,7 +127,7 @@ Page.define({
     },
     clear () {
       this.setData({
-        todos: clone(this.data.todos).filter((t) => !t.completed),
+        todos: this.data.todos.filter((t) => !t.completed),
       })
     },
   },
