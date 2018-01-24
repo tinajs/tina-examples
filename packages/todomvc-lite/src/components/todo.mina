@@ -1,0 +1,42 @@
+<config>
+{
+  "component": true
+}
+</config>
+
+<template>
+  <view class="item {{ todo.completed ? 'done' : '' }}" bindtap="handleTap">
+    {{ todo.text }}
+  </view>
+</template>
+
+<script>
+import { Component } from '@tinajs/tina'
+
+Component.define({
+  properties: {
+    todo: Object,
+  },
+  methods: {
+    handleTap () {
+      this.triggerEvent('toggle', { todo: this.data.todo })
+    },
+  },
+})
+</script>
+
+<style lang="less">
+.item {
+  padding: 1em;
+  line-height: 1.5em;
+  border-bottom: 1px solid #ccc;
+  &:active {
+    background-color: #f2f2f2;
+    color: #999;
+  }
+  &.done {
+    color: #ccc;
+    text-decoration: line-through;
+  }
+}
+</style>

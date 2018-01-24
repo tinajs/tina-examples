@@ -1,3 +1,11 @@
+<config>
+{
+  "usingComponents": {
+    "todo": "../components/todo.mina"
+  }
+}
+</config>
+
 <template>
   <view class="container">
     <view class="title">Todos</view>
@@ -5,9 +13,7 @@
       <input value="{{ input }}" placeholder="What needs to be done?" type="text" confirm-type="send" bindinput="input" bindconfirm="addTodo" />
     </view>
     <view class="list">
-      <view wx:for="{{ filtered }}" wx:for-item="todo" wx:key="id" class="item {{ todo.completed ? 'done' : '' }}" data-id="{{ todo.id }}" bindtap="toggleTodo">
-        {{ todo.text }}
-      </view>
+      <todo wx:for="{{ filtered }}" wx:key="id" class="item" todo="{{ item }}" bind:toggle="toggleTodo" />
       <view class="filter">
         <view wx:for="{{ FILTERS }}" wx:key="key" class="option {{ filter === item.key ? 'selected' : '' }}" data-filter="{{ item.key }}" bindtap="tapFilter">
           {{ item.text }}
@@ -59,7 +65,7 @@ Page.define({
   },
   methods: {
     toggleTodo (event) {
-      let { id } = event.currentTarget.dataset
+      let id = event.detail.todo.id
       let todos = clone(this.data.todos)
       let todo = todos.find((t) => t.id === id)
       todo.completed = !todo.completed
@@ -122,20 +128,10 @@ Page.define({
   border-radius: 4px;
   overflow: hidden;
   .item {
-    padding: 1em;
-    line-height: 1.5em;
-    border-bottom: 1px solid #ccc;
+    display: block;
     background-color: #fbfbfb;
     &:nth-child(2n) {
       background-color: #fefefe;
-    }
-    &:active {
-      background-color: #f2f2f2;
-      color: #999;
-    }
-    &.done {
-      color: #ccc;
-      text-decoration: line-through;
     }
   }
   .filter {
