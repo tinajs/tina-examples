@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "target": {
+          "node": "7"
+        }
+      }
+    ],
+    "stage-0"
+  ]
+}

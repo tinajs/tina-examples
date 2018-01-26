@@ -1,0 +1,27 @@
+<config>
+{
+  "window": {
+    "navigationBarTitleText": "TodoMVC Lite"
+  },
+  "pages": [
+    "pages/home.mina"
+  ]
+}
+</config>
+
+<script>
+import Tina from '@tinajs/tina'
+import ImmutablePlugin from '@tinajs/tina-immutable'
+
+Tina.use(ImmutablePlugin)
+
+App({
+})
+</script>
+
+<style>
+page {
+  font-size: 14px;
+  font-family: Helvetica, serif;
+}
+</style>
