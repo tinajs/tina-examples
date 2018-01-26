@@ -5,22 +5,31 @@
 </config>
 
 <template>
-  <view class="item {{ todo.completed ? 'done' : '' }}" bindtap="handleTap">
+  <view class="item {{ todo.completed ? 'done' : '' }}" bindtap="toggleTodo">
     {{ todo.text }}
   </view>
 </template>
 
 <script>
 import { Component } from '@tinajs/tina'
+import { toggleTodo } from '../actions'
+import store from '../store'
+
+function mapState (state) {
+  return {}
+}
+function mapDispatch (dispatch) {
+  return {
+    toggleTodo () {
+      dispatch(toggleTodo(this.data.get('todo').get('id')))
+    },
+  }
+}
 
 Component.define({
+  mixins: [store.connect(mapState, mapDispatch)],
   properties: {
     todo: Object,
-  },
-  methods: {
-    handleTap () {
-      this.triggerEvent('toggle', { todo: this.data.get('todo') })
-    },
   },
 })
 </script>

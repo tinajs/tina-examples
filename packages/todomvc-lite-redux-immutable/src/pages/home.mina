@@ -27,6 +27,8 @@
 <script>
 import { Page } from '@tinajs/tina'
 import { Map, fromJS } from 'immutable'
+import { addTodo, setVisibilityFilter, clearCompletedTodos } from '../actions'
+import store from '../store'
 
 const FILTERS = [
   { key: 'SHOW_ALL', text: 'All' },
@@ -34,73 +36,53 @@ const FILTERS = [
   { key: 'SHOW_COMPLETED', text: 'Completed' },
 ]
 
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_COMPLETED':
+      return todos.filter(t => t.get('completed'))
+    case 'SHOW_ACTIVE':
+      return todos.filter(t => !t.get('completed'))
+    case 'SHOW_ALL':
+    default:
+      return todos
+  }
+}
+
+function mapState (state) {
+  return {
+    todos: state.todos,
+    filter: state.visibilityFilter,
+    filtered: getVisibleTodos(state.todos, state.visibilityFilter),
+  }
+}
+function mapDispatch (dispatch) {
+  return {
+    tapFilter (event) {
+      dispatch(setVisibilityFilter(event.currentTarget.dataset.filter))
+    },
+    addTodo (event) {
+      dispatch(addTodo(event.detail.value))
+      this.setData({
+        input: '',
+      })
+    },
+  }
+}
+
 Page.define({
+  mixins: [store.connect(mapState, mapDispatch)],
   data: {
     FILTERS,
-    filter: 'SHOW_ALL',
-    todos: fromJS([
-      { id: 1, text: 'Star Tina.js', completed: false },
-      { id: 2, text: 'Star Tina-Redux', completed: true },
-      { id: 3, text: 'Build a mini-program with Tina.js', completed: false },
-      { id: 4, text: 'Add to Showcase of Tina.js', completed: false },
-    ]),
     input: '',
   },
-  compute (data) {
-    let filter = data.get('filter')
-    let todos = data.get('todos')
-    let filtered = []
-    switch (filter) {
-      case 'SHOW_ALL':
-        filtered = todos
-        break
-      case 'SHOW_ACTIVE':
-        filtered = todos.filter((t) => !t.get('completed'))
-        break
-      case 'SHOW_COMPLETED':
-        filtered = todos.filter((t) => t.get('completed'))
-        break
-    }
-    return {
-      filtered,
-    }
-  },
   methods: {
-    toggleTodo (event) {
-      let id = event.detail.todo.get('id')
-      let todos = this.data.get('todos')
-      let index = todos.findIndex((t) => t.get('id') === id)
-      let todo = todos.get(index)
-      this.setData({
-        todos: todos.set(index, todo.set('completed', !todo.get('completed'))),
-      })
-    },
-    tapFilter (event) {
-      let { filter } = event.currentTarget.dataset
-      this.setData({
-        filter,
-      })
-    },
     input (e) {
       this.setData({
         input: e.detail.value,
       })
     },
-    addTodo (event) {
-      let { value } = event.detail
-      this.setData({
-        todos: this.data.get('todos').push(new Map({
-          id: Date.now(),
-          text: value,
-          completed: false,
-        })),
-        input: '',
-      })
-    },
     clear () {
-      this.setData({
-        todos: this.data.get('todos').filter((t) => !t.get('completed')),
-      })
+      this.$dispatch({ type: 'CLEAR_COMPLETED_TODOS' })
     },
   },
 })
