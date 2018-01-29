@@ -12,8 +12,8 @@
     "build": "cross-env NODE_ENV=production webpack"
   },
   "dependencies": {
-    "@tinajs/tina": "^1.3.0",
-    "@tinajs/tina-immutable": "^0.1.3",
+    "@tinajs/tina": "^1.4.0",
+    "@tinajs/tina-immutable": "^1.0.0",
     "@tinajs/tina-redux": "^0.1.1",
     "es6-promise": "^4.1.1",
     "eventemitter3": "^3.0.0",

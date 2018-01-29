@@ -29,7 +29,7 @@
     "webpack": "^3.8.1"
   },
   "dependencies": {
-    "@tinajs/tina": "^1.2.0",
+    "@tinajs/tina": "^1.4.0",
     "wxio": "0.x"
   }
 }
