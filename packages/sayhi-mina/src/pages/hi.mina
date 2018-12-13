@@ -6,8 +6,8 @@
 </template>
 
 <script>
-const { Page } = require('@tinajs/tina')
-const { fetchUser } = require('../api')
+import { Page } from '@tinajs/tina'
+import { fetchUser } from '../api'
 
 Page.define({
   data: {

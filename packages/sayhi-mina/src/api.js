@@ -1,6 +1,6 @@
-const wxio = require('wxio')
+import wxio from 'wxio'
 
-exports.fetchUser = function () {
+export function fetchUser () {
   return wxio.request({
     url: 'https://uinames.com/api/',
   }).then(({ data }) => data)
