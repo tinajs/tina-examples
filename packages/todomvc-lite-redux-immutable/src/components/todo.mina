@@ -34,7 +34,7 @@ Component.define({
 })
 </script>
 
-<style lang="less">
+<style lang="postcss">
 .item {
   padding: 1em;
   line-height: 1.5em;

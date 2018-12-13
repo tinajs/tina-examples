@@ -88,7 +88,7 @@ Page.define({
 })
 </script>
 
-<style lang="less">
+<style lang="postcss">
 .container {
   padding: 28px;
   color: #333;
