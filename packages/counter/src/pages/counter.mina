@@ -58,7 +58,7 @@ page, .view {
 </template>
 
 <script>
-const { Page } = require('@tinajs/tina')
+import { Page } from '@tinajs/tina'
 
 Page.define({
   data: {
