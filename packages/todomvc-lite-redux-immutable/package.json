@@ -5,7 +5,7 @@
   "description": "",
   "author": "yelo",
   "scripts": {
-    "clean": "rimraf './dist/!(app.json)**'",
+    "clean": "rimraf \"./dist/!(app.json)**\"",
     "prestart": "run-s clean",
     "prebuild": "run-s clean",
     "start": "webpack -w",
